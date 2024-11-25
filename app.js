@@ -4,7 +4,7 @@ const app = express();
 
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, 'index.html'));
+    res.sendFile(path.join(__dirname, 'Public/index.html'));
 });
 
 app.get('/api', (req, res) => {
