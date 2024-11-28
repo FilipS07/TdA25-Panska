@@ -1,0 +1,10 @@
+version: '3'
+services:
+  app:
+    image: tda
+    volumes:
+      - my_volume:/var/www/html
+    ports:
+      - "8080:80"
+volumes:
+  my_volume:
