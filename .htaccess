@@ -1,0 +1,4 @@
+RewriteEngine On
+
+# Přesměrování požadavků na /api přímo na api.php ve stejné složce
+RewriteRule ^api$ api.php [L]
