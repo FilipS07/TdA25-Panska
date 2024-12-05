@@ -17,7 +17,7 @@ Prerekvizity
 
 ```
     docker build . -t tda-php
-    docker run -p 8080:80 -v ${pwd}:/app tda-php
+    docker run -d --name tea -p 8080:80 -v "C:\Users\filip\Downloads\TdA25-Panska-main (1)\TdA25-Panska-main\php:/var/www/html" tda-image
 ```
 
 Aplikace bude následně přístupná na `http://localhost:8080`
