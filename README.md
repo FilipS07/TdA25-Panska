@@ -17,7 +17,8 @@ Prerekvizity
 
 ```
     docker build . -t tda-php
-    docker run -d --name tea -p 8080:80 -v "%cd%/php:/var/www/html" tda-image
+    docker run -d --name tea -p 8080:80 -v "%cd%/php:/var/www/html" tda-php
+
 
 ```
 
