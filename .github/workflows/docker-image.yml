@@ -26,5 +26,5 @@ jobs:
         uses: Tour-de-App/upload-app@tda-25
         with:
           team_token: ${{ secrets.TEAM_TOKEN }}
-          image_name: tda-php
-          image_path: Dockerfile
+          image_name: tda-generic
+          image_path: /tmp/tda-generic.tar
