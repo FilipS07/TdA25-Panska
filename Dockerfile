@@ -21,8 +21,8 @@ COPY ./public /var/www/html/
 COPY ./api /var/www/html/api/
 COPY ./css /var/www/html/css/
 COPY ./js /var/www/html/js/
-COPY ./.htaccess /var/www/html/
 COPY ./db/database.sqlite /var/www/html/db/database.sqlite
+COPY ./.htaccess /var/www/html/
 
 # Kopírování startovacího skriptu
 COPY start.sh /start.sh
