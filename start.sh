@@ -6,9 +6,5 @@ service mariadb start
 # Wait for MariaDB to start up
 sleep 5
 
-# Create the database if it doesn't exist
-echo "CREATE DATABASE IF NOT EXISTS db" | mysql
-
-
 # Start Apache in the foreground
 apache2ctl -D FOREGROUND
