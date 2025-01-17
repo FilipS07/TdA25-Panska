@@ -1,29 +1,21 @@
-# Použití PHP 8.1 s Apache jako základní image
+# Use the PHP 8.1 with Apache image as the base
 FROM php:8.1-apache
 
-# Nastavení pracovního adresáře
-WORKDIR /var/www/html
-
-# Instalace systémových závislostí a MariaDB
+# Install system dependencies and MariaDB
 RUN apt-get update && \
     apt-get install -y mariadb-server && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
-# Povolení Apache mod_rewrite
+# Enable Apache mod_rewrite
 RUN a2enmod rewrite
 
-# Kopírování aplikace (pokud máte soubory přímo v kořenovém adresáři nebo ve složce php)
-COPY ./ /var/www/html/
+COPY . /app
 
-# Kopírování databázového souboru, pokud ho máte ve správné cestě
-COPY ./db/database.sql /app/database.sql
+# Copy the application code to the container
+COPY ./php /var/www/html
 
-# Kopírování startovacího skriptu (ujistěte se, že máte tento skript ve správné cestě)
-COPY ./start.sh /start.sh
-RUN chmod +x /start.sh
-
-# Konfigurace Apache
+# Update the Apache configuration to point to /var/www/html/www (where your index.php is)
 RUN echo '<VirtualHost *:80>\n\
     DocumentRoot /var/www/html\n\
     ServerName localhost\n\
@@ -33,8 +25,12 @@ RUN echo '<VirtualHost *:80>\n\
     </Directory>\n\
 </VirtualHost>' > /etc/apache2/sites-available/000-default.conf
 
-# Vystavení portu 80
+# Expose port 80
 EXPOSE 80
 
-# Spuštění startovacího skriptu
-ENTRYPOINT ["/start.sh"]
+# Copy start.sh and make it executable
+COPY start.sh /start.sh
+RUN chmod +x /start.sh
+
+# Start Apache and other services
+CMD ["/start.sh"]
