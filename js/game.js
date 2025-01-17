@@ -1,6 +1,6 @@
 const gameContainer = document.getElementById("game-container");
 
-let currentPlayer = "✖️";
+let currentPlayer = "✖️";  // Začínáme s křížkem
 let board = Array(15).fill().map(() => Array(15).fill(null));
 
 // Vytvoření herní plochy
@@ -10,15 +10,29 @@ for (let i = 0; i < 15; i++) {
         cell.dataset.row = i;
         cell.dataset.col = j;
 
+        // Stylování buněk pro zobrazení obrázků
+        cell.style.width = "40px"; // Můžete upravit velikost
+        cell.style.height = "40px"; // Můžete upravit velikost
+        cell.style.border = "1px solid #000"; // Okraje pro buňky
+        cell.style.display = "inline-block";
+        cell.style.cursor = "pointer";
+        
         cell.addEventListener("click", () => {
-            if (!cell.textContent) {
-                cell.textContent = currentPlayer;
+            if (!cell.style.backgroundImage) { // Pokud není políčko již obsazené
+                // Nastavení obrázku na základě aktuálního hráče
+                if (currentPlayer === "✖️") {
+                    cell.style.backgroundImage = "url('public/img/cross.svg')";
+                } else {
+                    cell.style.backgroundImage = "url('public/img/circle.svg')";
+                }
+
                 board[i][j] = currentPlayer;
 
                 if (checkWinner(i, j)) {
                     alert(`${currentPlayer} vyhrál!`);
                 }
 
+                // Přepnutí hráče
                 currentPlayer = currentPlayer === "✖️" ? "⭕" : "✖️";
             }
         });
@@ -29,6 +43,6 @@ for (let i = 0; i < 15; i++) {
 
 // Kontrola výhry
 function checkWinner(row, col) {
-    // Kontrola řádků, sloupců a diagonál...
+    // Zde by měla být logika pro kontrolu výhry (řádky, sloupce, diagonály)
     return false; // Prozatím prázdné
 }
