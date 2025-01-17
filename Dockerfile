@@ -13,12 +13,14 @@ RUN apt-get update && \
 # Povolení Apache mod_rewrite
 RUN a2enmod rewrite
 
-# Kopírování aplikace
-COPY ./php /var/www/html
-COPY database.sql /app/database.sql
+# Kopírování aplikace (pokud máte soubory přímo v kořenovém adresáři nebo ve složce php)
+COPY ./ /var/www/html/
 
-# Kopírování startovacího skriptu
-COPY start.sh /start.sh
+# Kopírování databázového souboru, pokud ho máte ve správné cestě
+COPY ./db/database.sql /app/database.sql
+
+# Kopírování startovacího skriptu (ujistěte se, že máte tento skript ve správné cestě)
+COPY ./start.sh /start.sh
 RUN chmod +x /start.sh
 
 # Konfigurace Apache
