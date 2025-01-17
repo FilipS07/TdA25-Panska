@@ -1,10 +1,14 @@
-version: '3'
+version: "3.8"
 services:
-  app:
-    image: tda
+  web:
+    build: .
+    ports:
+      - "80:80"
     volumes:
-      - my_volume:/var/www/html
+      - ./public:/var/www/html
+  api:
+    build: .
     ports:
       - "8080:80"
-volumes:
-  my_volume:
+    volumes:
+      - ./api:/var/www/html
