@@ -1,14 +1,16 @@
-version: "3.8"
+version: '3.8'
+
 services:
-  web:
-    build: .
-    ports:
-      - "80:80"
-    volumes:
-      - ./public:/var/www/html
-  api:
-    build: .
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "8080:80"
     volumes:
-      - ./api:/var/www/html
+      - ./public:/var/www/html
+      - ./api:/var/www/html/api
+      - ./css:/var/www/html/css
+      - ./js:/var/www/html/js
+      - ./db:/var/www/html/db
+    restart: always
