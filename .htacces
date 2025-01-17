@@ -1,0 +1,10 @@
+# Přesměrování všech požadavků začínajících na /api na index.php
+RewriteEngine On
+RewriteBase /
+
+# Přesměrování API
+RewriteRule ^api/(.*)$ /api/index.php [L]
+
+# Nastavení MIME typů pro správné načítání frontendu
+AddType application/javascript .js
+AddType text/css .css
